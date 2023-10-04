@@ -9,9 +9,19 @@
                     <h3>Category
                         <a href="{{url('admin/category')}}" class="btn btn-warning btn-sm text-white float-end">Back</a>
                     </h3>
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body" style="background: #ccc;">
-                    <form action="" enctype="multipart/form-data">
+                    <form action="{{url('admin/category')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
 
                             <div class="col-md-6 mb-3">
@@ -36,7 +46,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="status" class="mb-1">Status</label>
-                                <input type="checkbox" name="status" />
+                                <input type="checkbox" name="status"/>
                             </div>
 
                             <div class="col-md-12 mt-2 mb-2">
@@ -55,13 +65,14 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <label for="meta_description" class="mb-1">Meta Keywords</label>
+                                <label for="meta_description" class="mb-1">Meta Description</label>
                                 <textarea class="form-control" name="meta_description" id="meta_description"
                                           rows="3"></textarea>
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-lg btn-success text-white fw-bold float-end">Save</button>
+                                <button type="submit" class="btn btn-lg btn-success text-white fw-bold float-end">Save
+                                </button>
                             </div>
                         </div>
 
