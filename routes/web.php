@@ -24,11 +24,16 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () {
-    Route::get('dashboard',[DashboardController::class,'index']);
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
-    //category routes
-    Route::get('category',[CategoryController::class,'index'])->name('category.index');
-    Route::get('category/create',[CategoryController::class,'create'])->name('category.create');
-    Route::post('category',[CategoryController::class,'store'])->name('category.store');
+    //Category routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'index');
+        Route::get('/category/create', 'create');
+        Route::post('/category', 'store');
+        Route::get('/category/{category}/edit', 'edit');
+        Route::put('/category/{category}', 'update');
+    });
+
 });

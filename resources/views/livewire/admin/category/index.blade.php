@@ -27,22 +27,32 @@
                                 <td>{{$key + 1}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->slug}}</td>
-                                <td><img src="{{asset('uploads/category/'.$category->image)}}" class="img-fluid" /></td>
+                                <td><img src="{{asset('uploads/category/'.$category->image)}}" class="img-fluid"/></td>
                                 @if ($category->status === 0)
                                     <td class="text-success fw-bold">Active</td>
                                 @else
                                     <td class="text-danger fw-bold">In-Active</td>
                                 @endif
                                 <td>{{$category->meta_title}}</td>
-                                <td>{{$category->meta_keyword}}</td>
+                                <td>
+                                    @php
+                                        $keywords = explode(',', $category->meta_keyword);
+                                    @endphp
+                                    @foreach ($keywords as $keyword)
+                                        @if (!empty(trim($keyword)))
+                                            <span class="badge bg-secondary mb-2 mt-2">{{$keyword}}</span>
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>
                                     <a href="{{url('admin/category/'.$category->id.'/edit')}}"
-                                       class="btn btn-primary btn-sm">Edit</a>
+                                       class="btn btn-inverse-warning text-black fw-bold btn-sm mb-2">Edit</a>
                                     <a href="{{url('admin/category/'.$category->id.'/delete')}}"
-                                       class="btn btn-danger btn-sm">Delete</a>
+                                       class="btn btn-inverse-danger text-black fw-bold btn-sm mb-2">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
+
                         </tbody>
                         {{ $categories->links() }}
                     </table>
