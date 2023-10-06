@@ -42,9 +42,9 @@ class CategoryController extends Controller
             $category->meta_keyword = $categoryData['meta_keywords'];
             $category->meta_description = $categoryData['meta_description'];
             $category->save();
-            return redirect('admin/category/create')->with('message', 'Category created successfully');
+            return redirect('admin/category/create')->with('success', 'Category created successfully');
         } catch (\Exception $e) {
-            return redirect('admin/category/create')->with('message', 'Category creation Failed !');
+            return redirect('admin/category/create')->with('error', 'Category creation Failed !');
         }
     }
 
@@ -74,6 +74,6 @@ class CategoryController extends Controller
         $category->meta_keyword = $categoryData['meta_keywords'];
         $category->meta_description = $categoryData['meta_description'];
         $category->save();
-        return redirect('admin/category/')->with('message', 'Category Updated successfully');
+        return redirect('admin/category/')->with('success', 'Category Updated successfully');
     }
 }

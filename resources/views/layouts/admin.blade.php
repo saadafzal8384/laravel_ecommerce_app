@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{asset('admin/images/favicon.png')}}" />
+    @livewireStyles
 </head>
 <body>
 
@@ -56,5 +57,7 @@
 <!-- End custom js for this page-->
 
 <script src="{{asset('admin/js/jquery.cookie.js')}}" type="text/javascript"></script>
+@livewireScripts
+@stack('script')
 </body>
 </html>
