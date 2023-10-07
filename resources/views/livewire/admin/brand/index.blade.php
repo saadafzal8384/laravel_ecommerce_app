@@ -10,7 +10,8 @@
                         </div>
                     @endif
                     <h4>Brand List</h4>
-                    <a href="#" class="btn btn-inverse-success text-black fw-bolder btn-sm float-end" data-bs-toggle="modal"
+                    <a href="#" class="btn btn-inverse-success text-black fw-bolder btn-sm float-end"
+                       data-bs-toggle="modal"
                        data-bs-target="#addBrandModal">Add Brands</a>
                 </div>
                 <div class="card-body">
@@ -36,8 +37,11 @@
                                     <td class="text-danger fw-bold">In-Active</td>
                                 @endif
                                 <td>
-                                    <a href="#" class="btn btn-inverse-warning text-black fw-bold btn-sm mb-2">Edit</a>
-                                    <a href="#" class="btn btn-inverse-danger text-black fw-bold btn-sm mb-2">Delete</a>
+                                    <a href="#" wire:click="editBrand({{$brand->id}})" data-bs-toggle="modal"
+                                       data-bs-target="#updateBrandModal"
+                                       class="btn btn-inverse-warning text-black fw-bold btn-sm mb-2">Edit</a>
+                                    <a href="#" wire:click="deleteBrand({{$brand->id}})" data-bs-toggle="modal" data-bs-target="#deleteBrandModal"
+                                       class="btn btn-inverse-danger text-black fw-bold btn-sm mb-2">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -56,6 +60,8 @@
     <script>
         window.addEventListener('close-modal', event => {
             $('#addBrandModal').modal('hide');
+            $('#updateBrandModal').modal('hide');
+            $('#deleteBrandModal').modal('hide');
         })
     </script>
 @endpush

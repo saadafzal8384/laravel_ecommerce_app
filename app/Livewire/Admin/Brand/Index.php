@@ -10,9 +10,10 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
-    public $name, $slug, $status;
+    public $name, $slug, $status, $brand_id;
 
     public function rules(): array
     {
@@ -23,11 +24,28 @@ class Index extends Component
         ];
     }
 
+    public function render()
+    {
+        $brands = Brand::orderBy('id', 'ASC')->paginate(5);
+        return view('livewire.admin.brand.index', ['brands' => $brands])->extends('layouts.admin')->section('content');
+    }
+
     public function resetInputFields(): void
     {
-        $this->name = '';
-        $this->slug = '';
-        $this->status = '';
+        $this->name = NULL;
+        $this->slug = NULL;
+        $this->status = NULL;
+        $this->brand_id = NULL;
+    }
+
+    public function openModal(): void
+    {
+        $this->resetInputFields();
+    }
+
+    public function closeModal(): void
+    {
+        $this->resetInputFields();
     }
 
     public function storeBrand(): void
@@ -43,9 +61,40 @@ class Index extends Component
         $this->resetInputFields();
     }
 
-    public function render()
+    public function editBrand(int $brand_id): void
     {
-        $brands = Brand::orderBy('id', 'ASC')->paginate(5);
-        return view('livewire.admin.brand.index', ['brands' => $brands])->extends('layouts.admin')->section('content');
+        $this->brand_id = $brand_id;
+        $brand = Brand::findOrFail($brand_id);
+        $this->name = $brand->name;
+        $this->slug = $brand->slug;
+        $this->status = $brand->status;
+        $this->dispatch('open-modal');
+    }
+
+    public function updateBrand(): void
+    {
+        $this->validate();
+        $brand = Brand::findOrFail($this->brand_id);
+        $brand->update([
+            'name' => $this->name,
+            'slug' => Str::slug($this->slug),
+            'status' => $this->status === true ? '1' : '0',
+        ]);
+        session()->flash('success', 'Brand Updated Successfully.');
+        $this->dispatch('close-modal');
+        $this->resetInputFields();
+    }
+
+    public function deleteBrand(int $brand_id): void
+    {
+        $this->brand_id = $brand_id;
+    }
+
+    public function destroyBrand(): void
+    {
+        Brand::findOrFail($this->brand_id)->delete();
+        session()->flash('success', 'Brand Deleted Successfully.');
+        $this->dispatch('close-modal');
+        $this->resetInputFields();
     }
 }
