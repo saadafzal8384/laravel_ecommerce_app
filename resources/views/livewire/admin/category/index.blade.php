@@ -84,7 +84,9 @@
                             @endforeach
 
                             </tbody>
-                            {{ $categories->links() }}
+                            <div>
+                                {{ $categories->links() }}
+                            </div>
                         </table>
                     </div>
 

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Category
+                    <h3>Add New Category
                         <a href="{{url('admin/category')}}" class="btn btn-warning btn-sm text-white float-end">Back</a>
                     </h3>
                     @if($errors->any())
