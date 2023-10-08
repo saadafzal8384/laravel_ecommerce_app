@@ -27,9 +27,19 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/brands')}}">Brands</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/products/create')}}">Add Products</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/products')}}">View Products</a></li>
                 </ul>
             </div>
         </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/brands')}}">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Brands</span>
+            </a>
+        </li>
+
     </ul>
 </nav>
