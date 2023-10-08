@@ -142,7 +142,7 @@
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="product_image" class="mb-2">Please Upload Product Images</label>
-                                        <input type="file" name="image[]" multiple class="form-control" />
+                                        <input type="file" id="images" name="image[]" class="form-control" multiple />
                                     </div>
                                 </div>
                             </div>
