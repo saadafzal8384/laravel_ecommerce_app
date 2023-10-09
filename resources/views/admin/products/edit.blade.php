@@ -9,6 +9,11 @@
                     <h3>Update Product
                         <a href="{{url('admin/products')}}" class="btn btn-warning btn-sm text-white float-end">Back</a>
                     </h3>
+                   @if('success')
+                           <div class="alert alert-success">
+                               {{session('success')}}
+                           </div>
+                   @endif
                     @if($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -95,7 +100,8 @@
                             <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">
                                 <div class="mb-3 row">
                                     <label for="meta_title" class="mb-2">Meta Title</label>
-                                    <input type="text" value="{{$product->meta_title}}" name="meta_title" class="form-control">
+                                    <input type="text" value="{{$product->meta_title}}" name="meta_title"
+                                           class="form-control">
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="meta_description" class="mb-2">Meta Description</label>
@@ -113,31 +119,36 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="original_price" class="mb-2">Original Price</label>
-                                            <input type="text" value="{{$product->original_price}}" name="original_price" class="form-control">
+                                            <input type="text" value="{{$product->original_price}}"
+                                                   name="original_price" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="selling_price" class="mb-2">Selling Price</label>
-                                            <input type="text" value="{{$product->selling_price}}" name="selling_price" class="form-control">
+                                            <input type="text" value="{{$product->selling_price}}" name="selling_price"
+                                                   class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="quantity" class="mb-2">Quantity</label>
-                                            <input type="number" value="{{$product->quantity}}" name="quantity" class="form-control">
+                                            <input type="number" value="{{$product->quantity}}" name="quantity"
+                                                   class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="trending" class="mb-2">Trending</label>
-                                            <input type="checkbox" name="trending" {{$product->trending === '1' ? 'checked': ''}}>
+                                            <input type="checkbox"
+                                                   name="trending" {{$product->trending === '1' ? 'checked': ''}}>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="status" class="mb-2">Status</label>
-                                            <input type="checkbox" name="status" {{$product->status === '1' ? 'checked': ''}} />
+                                            <input type="checkbox"
+                                                   name="status" {{$product->status === '1' ? 'checked': ''}} />
                                         </div>
                                     </div>
                                 </div>
@@ -150,11 +161,21 @@
                                     </div>
                                     <div>
                                         @if($product->productImages)
-                                            @foreach($product->productImages as $images)
-                                                <img class="me-4 border" src="{{asset($images->image)}}" style="height: 100px; width: 100px;" alt="product image">
-                                            @endforeach
+                                            <div class="row">
+                                                @foreach($product->productImages as $image)
+                                                    <div class="col-md-2">
+                                                        <img class="me-4 border" src="{{asset($image->image)}}"
+                                                             style="height: 100px; width: 100px;" alt="product image">
+                                                        <a class="d-block"
+                                                           href="{{url('admin/product-image/'.$image->id.'/delete')}}">Remove</a>
+                                                    </div>
+
+                                                @endforeach
+
+                                            </div>
+
                                         @else
-                                        <h4>No Images Found</h4>
+                                            <h4>No Images Found</h4>
                                         @endif
                                     </div>
                                 </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\ProductFormRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -118,6 +119,20 @@ class ProductController extends Controller
                     'product_id' => $product->id,
                 ]);
             }
+        }
+    }
+
+    public function destroyImage(int $product_image_id): RedirectResponse
+    {
+        $productImage = ProductImage::findOrFail($product_image_id);
+        if ($productImage) {
+            if (file_exists($productImage->image)) {
+                unlink($productImage->image);
+            }
+            $productImage->delete();
+            return redirect()->back()->with('success', 'Product image deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'No such product image found');
         }
     }
 }
