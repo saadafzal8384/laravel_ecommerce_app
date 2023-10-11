@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\HomeController;
@@ -49,4 +50,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
 
     Route::get('/brands', Index::class);
+
+    Route::controller(ColorController::class)->group(function () {
+        Route::get('/colors', 'index');
+        Route::get('/colors/create', 'create');
+        Route::post('/colors/create', 'store');
+    });
 });
