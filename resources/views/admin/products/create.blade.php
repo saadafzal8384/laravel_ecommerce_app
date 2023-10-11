@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="meta_keywords" class="mb-2">Meta Keywords</label>
-                                    <textarea name="meta_keywords" class="form-control" id="meta_keywords" cols="30"
+                                    <textarea name="meta_keyword" class="form-control" id="meta_keywords" cols="30"
                                               rows="10"></textarea>
                                 </div>
                             </div>

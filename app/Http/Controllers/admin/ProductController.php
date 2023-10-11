@@ -135,4 +135,25 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'No such product image found');
         }
     }
+
+    public function destroy(int $product_id)
+    {
+        $product = Product::findOrFail($product_id);
+        if ($product) {
+            if($product->productImages)
+            {
+                foreach ($product->productImages as $productImage)
+                {
+                    if (file_exists($productImage->image)) {
+                        unlink($productImage->image);
+                    }
+                    $productImage->delete();
+                }
+            }
+            $product->delete();
+            return redirect()->back()->with('success', 'Product deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'No such product found');
+        }
+    }
 }

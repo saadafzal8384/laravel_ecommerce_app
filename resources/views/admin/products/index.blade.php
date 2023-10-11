@@ -51,15 +51,11 @@
                                 @endif
                                 <td>
                                     <a href="{{url('admin/products/'.$product->id.'/edit')}}"
-                                       class="btn btn-inverse-warning text-black fw-bold btn-sm mb-2">Edit</a>
-                                    <form action="{{url('admin/products/'.$product->id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
+                                       class="btn btn-inverse-warning text-black fw-bold btn-lg mb-2">Edit</a>
+                                        <a href="{{url('admin/products/'.$product->id.'/delete')}}"
                                                 onclick="return confirm('Are you sure you want to delete this product?')"
-                                                class="btn btn-inverse-danger text-black fw-bold btn-sm">Delete
-                                        </button>
-                                    </form>
+                                                class="btn btn-inverse-danger text-black fw-bold btn-lg mb-2">Delete
+                                        </a>
                                 </td>
                             </tr>
                             @endforeach

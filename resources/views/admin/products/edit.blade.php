@@ -9,7 +9,7 @@
                     <h3>Update Product
                         <a href="{{url('admin/products')}}" class="btn btn-warning btn-sm text-white float-end">Back</a>
                     </h3>
-                   @if('success')
+                   @if(session('success'))
                            <div class="alert alert-success">
                                {{session('success')}}
                            </div>
