@@ -27,11 +27,32 @@
                     <table class="table table-bordered table-striped align-middle">
                         <thead>
                         <tr>
-
+                            <th>Sr #</th>
+                            <th>Color Name</th>
+                            <th>Color Code</th>
+                            <th>Color Status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                        @foreach($colors as $key => $color)
+                            <tr>
+                                <td>{{$key+1}}</td>
+                                <td>{{$color->name}}</td>
+                                <td>{{$color->code}}</td>
+                                @if ($color->status === 0)
+                                    <td class="text-success fw-bold">Active</td>
+                                @else
+                                    <td class="text-danger fw-bold">In-Active</td>
+                                @endif
+                                <td>
+                                    <a href="{{url('admin/colors/'.$color->id. '/edit')}}"
+                                       class="btn btn-inverse-warning btn-sm text-black">Edit</a>
+                                    <a href="{{url('admin/colors/'.$color->id. '/delete')}}"
+                                       class="btn btn-inverse-danger btn-sm text-black">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
