@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ColorFormRequest extends FormRequest
 {
-    public bool $status = false;
 
     /**
      * Determine if the user is authorized to make this request.

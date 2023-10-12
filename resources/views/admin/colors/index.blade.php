@@ -49,6 +49,7 @@
                                     <a href="{{url('admin/colors/'.$color->id. '/edit')}}"
                                        class="btn btn-inverse-warning btn-sm text-black">Edit</a>
                                     <a href="{{url('admin/colors/'.$color->id. '/delete')}}"
+                                       onclick="return confirm('Are you sure you want to delete this color?');"
                                        class="btn btn-inverse-danger btn-sm text-black">Delete</a>
                                 </td>
                             </tr>

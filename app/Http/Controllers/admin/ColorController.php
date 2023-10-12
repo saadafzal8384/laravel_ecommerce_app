@@ -57,7 +57,7 @@ class ColorController extends Controller
             $color = Colors::findOrFail($color->id);
             $color->name = $validatedData['name'];
             $color->code = $validatedData['code'];
-            $color->status = $request->status === true ? '1' : '0';
+            $color->status = $request->has('status');
             if($color->save())
             {
                 return redirect('admin/colors')->with('success', 'Color updated successfully');
@@ -68,5 +68,18 @@ class ColorController extends Controller
             }
         }
         return redirect('admin/colors')->back()->with('error', 'Invalid Color Data');
+    }
+
+    public function destroy(Colors $color)
+    {
+        $color = Colors::findOrFail($color->id);
+        if($color->delete())
+        {
+            return redirect('admin/colors')->with('success', 'Color deleted successfully');
+        }
+        else
+        {
+            return redirect('admin/colors')->back()->with('error', 'Database error');
+        }
     }
 }

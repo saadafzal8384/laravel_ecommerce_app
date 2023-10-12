@@ -42,7 +42,7 @@
 
                         <div class="mb-3">
                             <label class="mb-2" for="status">Status</label>
-                            <input type="checkbox" name="status" {{$color->status ? 'checked' : ''}} />
+                            <input type="checkbox" name="status" {{ old('status', $color->status) ? 'checked' : '' }} />
                         </div>
 
                         <div class="mb-3">
