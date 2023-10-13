@@ -49,6 +49,11 @@
                                         type="button" role="tab" aria-controls="images" aria-selected="false">Product Images
                                 </button>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="colors-tab" data-bs-toggle="tab" data-bs-target="#colors"
+                                        type="button" role="tab" aria-controls="colors" aria-selected="false">Product Colors
+                                </button>
+                            </li>
                         </ul>
                         <div class="tab-content p-3" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -146,9 +151,28 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-success btn-lg float-end">Save</button>
+                            <div class="tab-pane fade" id="colors" role="tabpanel" aria-labelledby="colors-tab">
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="product_color" class="mb-2">Select product Colors</label>
+                                        <div class="row mt-3">
+                                            @foreach($colors as $color)
+                                                <div class="col-md-3">
+                                                    <div class="p-2 border mb-3">
+                                                        Color:  <input type="checkbox" name="colors[{{$color->id}}]" value="{{$color->id}}" /> {{$color->name}}
+                                                        <br /><br />
+
+                                                        Quantity:<br /><br /> <input type="text" class="form-control" name="color_quantity[{{$color->id}}]"  style="width: 100px;" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-success btn-lg float-end">Save</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Colors;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Foundation\Application;
@@ -26,7 +27,8 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.products.create', ['categories' => $categories, 'brands' => $brands]);
+        $colors = Colors::where('status', '0')->get();
+        return view('admin.products.create', ['categories' => $categories, 'brands' => $brands, 'colors' => $colors]);
     }
 
     public function store(ProductFormRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -52,6 +54,17 @@ class ProductController extends Controller
             ]);
 
             $this->saveProductImages($request, $product);
+
+            if($request->colors)
+            {
+                foreach ($request->colors as $key =>  $color) {
+                    $product->productColors()->create([
+                        'product_id' => $product->id,
+                        'color_id' => $color,
+                        'quantity' => $request->color_quantity[$key] ?? 0,
+                    ]);
+                }
+            }
 
             return redirect('admin/products')->with('success', 'Product created successfully');
 
@@ -140,10 +153,8 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($product_id);
         if ($product) {
-            if($product->productImages)
-            {
-                foreach ($product->productImages as $productImage)
-                {
+            if ($product->productImages) {
+                foreach ($product->productImages as $productImage) {
                     if (file_exists($productImage->image)) {
                         unlink($productImage->image);
                     }

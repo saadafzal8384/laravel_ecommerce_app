@@ -70,7 +70,7 @@ class ColorController extends Controller
         return redirect('admin/colors')->back()->with('error', 'Invalid Color Data');
     }
 
-    public function destroy(Colors $color)
+    public function destroy(Colors $color): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $color = Colors::findOrFail($color->id);
         if($color->delete())
