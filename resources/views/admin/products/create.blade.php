@@ -154,7 +154,7 @@
                             <div class="tab-pane fade" id="colors" role="tabpanel" aria-labelledby="colors-tab">
                                 <div class="row">
                                     <div class="mb-3">
-                                        <label for="product_color" class="mb-2">Select product Colors</label>
+                                        <label for="product_color" class="mb-2">Select Product Colors</label>
                                         <div class="row mt-3">
                                             @foreach($colors as $color)
                                                 <div class="col-md-3">

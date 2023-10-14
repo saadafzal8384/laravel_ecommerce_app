@@ -78,7 +78,9 @@ class ProductController extends Controller
         $product = Product::with('productImages')->find($product_id);
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.products.edit', ['product' => $product, 'categories' => $categories, 'brands' => $brands]);
+        $product_colors = $product->productColors->pluck('color_id')->toArray();
+        $colors = Colors::whereNotIn('id', $product_colors)->get();
+        return view('admin.products.edit', ['product' => $product, 'categories' => $categories, 'brands' => $brands, 'colors' => $colors]);
     }
 
     public function update(int $product_id, ProductFormRequest $request)
